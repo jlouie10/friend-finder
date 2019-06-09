@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/jlouie10/friend-finder/issues"
   },
-  "homepage": "https://github.com/jlouie10/friend-finder#readme"
+  "homepage": "https://github.com/jlouie10/friend-finder#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
