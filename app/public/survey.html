@@ -162,7 +162,21 @@
                 .append(radioContainer);
         });
 
+        // Submit button event listener
+        $('#submit-btn').on('click', (event) => {
+            event.preventDefault();
 
+            let survey = {
+                name: $('#name').val().trim(),
+                photo: $('#photo-url').val().trim()
+            };
+
+            // AJAX post request to the /api/friends endpoint
+            $.post('/api/friends', survey)
+                .then((data) => {
+                    console.log(data);
+                });
+        });
     </script>
 
 </body>

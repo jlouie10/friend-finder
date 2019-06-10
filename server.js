@@ -15,5 +15,5 @@ app.listen(PORT, () => {
     console.log('Server listening on: http://localhost:' + PORT);
 
     html.routes(path, app);
-    api.routes(path, app)
+    api.routes(app);
 });
