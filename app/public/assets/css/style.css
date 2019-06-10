@@ -1,9 +1,8 @@
 body {
     font-family: 'Open Sans', sans-serif;
-    /* margin-bottom: 60px; */
     color: #333;
 }
 
-,navbar {
+.navbar {
     background-color: #eee;
 }

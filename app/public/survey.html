@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Reset CSS -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet" <!-- Font
+        Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <!-- App CSS -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+
+    <title>Survey - Friend Finder</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+        }
+
+        .mr-3p5 {
+            margin-right: 3.5rem;
+        }
+
+        .navbar {
+            background-color: #eee;
+        }
+
+        #submit-btn {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="/">Friend Finder</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/survey">Survey <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-4">
+                <h1>Instructions</h1>
+                <p>Complete the survey to match with a friend. Answer each question by selecting a number between 1
+                    (Strongly Disagree) and 5 (Strongly Agree).</p>
+            </div>
+
+            <div class="col-8 border-left">
+                <form method="POST" role="form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="John Smith">
+                    </div>
+                    <div class="form-group">
+                        <label for="photo-url">Link to Photo</label>
+                        <input type="url" class="form-control" id="photo-url" placeholder="https://example.com">
+                    </div>
+                    <div id="questions-container"></div>
+                    <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+        integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- App JavaScript -->
+    <script type="text/javascript">
+        let questions = [
+            'Your mind is always buzzing with unexplored ideas and plans.',
+            'Generally speaking, you rely more on your experience than your imagination.',
+            'You find it easy to stay relaxed and focused even when there is some pressure.',
+            'You rarely do something just out of sheer curiosity.',
+            'People can rarely upset you.',
+            'It is often difficult for you to relate to other people’s feelings.',
+            'In a discussion, truth should be more important than people’s sensitivities.',
+            'You rarely get carried away by fantasies and ideas.',
+            'You think that everyone’s views should be respected regardless of whether they are supported by facts or not.',
+            'You feel more energetic after spending time with a group of people.'
+        ];
+
+        questions.forEach((item, index, arr) => {
+            let questionsContainer = $('#questions-container');
+            let radioContainer = $('<div>');
+            let legend = $('<legend>');
+            let i;
+            let j;
+
+            radioContainer.addClass('mb-2');
+
+            for (i = 1, j = 5; i <= j; i++) {
+                let div = $('<div>');
+                let input = $('<input>');
+                let label = $('<label>');
+                let nameText = 'question-' + index;
+                let idText = nameText + '-' + i;
+
+                label.text(i)
+                    .addClass('form-check-label')
+                    .attr('for', idText);
+
+                input.addClass('form-check-input')
+                    .attr('type', 'radio')
+                    .attr('name', nameText)
+                    .attr('id', idText)
+                    .attr('value', i);
+
+                div.addClass('form-check form-check-inline mr-5')
+                    .append(input)
+                    .append(label);
+
+                radioContainer.append(div);
+            }
+
+            legend.text(item)
+                .addClass('col-form-label pt-0 pl-0');
+
+            questionsContainer.append(legend)
+                .append(radioContainer);
+        });
+
+
+    </script>
+
+</body>
+
+</html>
