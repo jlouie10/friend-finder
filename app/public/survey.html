@@ -126,8 +126,7 @@
             let questionsContainer = $('#questions-container');
             let radioContainer = $('<div>');
             let legend = $('<legend>');
-            let i;
-            let j;
+            let i, j;
 
             radioContainer.addClass('mb-2');
 
@@ -135,7 +134,7 @@
                 let div = $('<div>');
                 let input = $('<input>');
                 let label = $('<label>');
-                let nameText = 'question-' + index;
+                let nameText = 'question-' + (index + 1);
                 let idText = nameText + '-' + i;
 
                 label.text(i)
@@ -163,12 +162,23 @@
         });
 
         // Submit button event listener
-        $('#submit-btn').on('click', (event) => {
+        $('#submit-btn').on('click', event => {
             event.preventDefault();
 
-            let survey = {
+            let scores = [];
+            let survey, i, j;
+
+            // Creates an array of scores from the survey responses
+            for (i = 1, j = 10; i <= j; i++) {
+                scores.push(
+                    $("input[name='question-" + i + "']:checked").val()
+                );
+            }
+
+            survey = {
                 name: $('#name').val().trim(),
-                photo: $('#photo-url').val().trim()
+                photo: $('#photo-url').val().trim(),
+                scores: scores
             };
 
             // AJAX post request to the /api/friends endpoint
