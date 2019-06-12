@@ -109,83 +109,85 @@
 
     <!-- App JavaScript -->
     <script type="text/javascript">
-        let questions = [
-            'Your mind is always buzzing with unexplored ideas and plans.',
-            'Generally speaking, you rely more on your experience than your imagination.',
-            'You find it easy to stay relaxed and focused even when there is some pressure.',
-            'You rarely do something just out of sheer curiosity.',
-            'People can rarely upset you.',
-            'It is often difficult for you to relate to other people’s feelings.',
-            'In a discussion, truth should be more important than people’s sensitivities.',
-            'You rarely get carried away by fantasies and ideas.',
-            'You think that everyone’s views should be respected regardless of whether they are supported by facts or not.',
-            'You feel more energetic after spending time with a group of people.'
-        ];
+        $(() => {
+            let questions = [
+                'Your mind is always buzzing with unexplored ideas and plans.',
+                'Generally speaking, you rely more on your experience than your imagination.',
+                'You find it easy to stay relaxed and focused even when there is some pressure.',
+                'You rarely do something just out of sheer curiosity.',
+                'People can rarely upset you.',
+                'It is often difficult for you to relate to other people’s feelings.',
+                'In a discussion, truth should be more important than people’s sensitivities.',
+                'You rarely get carried away by fantasies and ideas.',
+                'You think that everyone’s views should be respected regardless of whether they are supported by facts or not.',
+                'You feel more energetic after spending time with a group of people.'
+            ];
 
-        questions.forEach((item, index, arr) => {
-            let questionsContainer = $('#questions-container');
-            let radioContainer = $('<div>');
-            let legend = $('<legend>');
-            let i, j;
+            questions.forEach((item, index, arr) => {
+                let questionsContainer = $('#questions-container');
+                let radioContainer = $('<div>');
+                let legend = $('<legend>');
+                let i, j;
 
-            radioContainer.addClass('mb-2');
+                radioContainer.addClass('mb-2');
 
-            for (i = 1, j = 5; i <= j; i++) {
-                let div = $('<div>');
-                let input = $('<input>');
-                let label = $('<label>');
-                let nameText = 'question-' + (index + 1);
-                let idText = nameText + '-' + i;
+                for (i = 1, j = 5; i <= j; i++) {
+                    let div = $('<div>');
+                    let input = $('<input>');
+                    let label = $('<label>');
+                    let nameText = 'question-' + (index + 1);
+                    let idText = nameText + '-' + i;
 
-                label.text(i)
-                    .addClass('form-check-label')
-                    .attr('for', idText);
+                    label.text(i)
+                        .addClass('form-check-label')
+                        .attr('for', idText);
 
-                input.addClass('form-check-input')
-                    .attr('type', 'radio')
-                    .attr('name', nameText)
-                    .attr('id', idText)
-                    .attr('value', i);
+                    input.addClass('form-check-input')
+                        .attr('type', 'radio')
+                        .attr('name', nameText)
+                        .attr('id', idText)
+                        .attr('value', i);
 
-                div.addClass('form-check form-check-inline mr-5')
-                    .append(input)
-                    .append(label);
+                    div.addClass('form-check form-check-inline mr-5')
+                        .append(input)
+                        .append(label);
 
-                radioContainer.append(div);
-            }
+                    radioContainer.append(div);
+                }
 
-            legend.text(item)
-                .addClass('col-form-label pt-0 pl-0');
+                legend.text(item)
+                    .addClass('col-form-label pt-0 pl-0');
 
-            questionsContainer.append(legend)
-                .append(radioContainer);
-        });
+                questionsContainer.append(legend)
+                    .append(radioContainer);
+            });
 
-        // Submit button event listener
-        $('#submit-btn').on('click', event => {
-            event.preventDefault();
+            // Submit button event listener
+            $('#submit-btn').on('click', event => {
+                event.preventDefault();
 
-            let scores = [];
-            let survey, i, j;
+                let scores = [];
+                let survey, i, j;
 
-            // Creates an array of scores from the survey responses
-            for (i = 1, j = 10; i <= j; i++) {
-                scores.push(
-                    $("input[name='question-" + i + "']:checked").val()
-                );
-            }
+                // Creates an array of scores from the survey responses
+                for (i = 1, j = 10; i <= j; i++) {
+                    scores.push(
+                        $("input[name='question-" + i + "']:checked").val()
+                    );
+                }
 
-            survey = {
-                name: $('#name').val().trim(),
-                photo: $('#photo-url').val().trim(),
-                scores: scores
-            };
+                survey = {
+                    name: $('#name').val().trim(),
+                    photo: $('#photo-url').val().trim(),
+                    scores: scores
+                };
 
-            // AJAX post request to the /api/friends endpoint
-            $.post('/api/friends', survey)
-                .then((data) => {
-                    console.log(data);
-                });
+                // AJAX post request to the /api/friends endpoint
+                $.post('/api/friends', survey)
+                    .then((data) => {
+                        console.log(data);
+                    });
+            });
         });
     </script>
 
