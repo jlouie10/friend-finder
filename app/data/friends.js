@@ -81,6 +81,45 @@ let friends = [
     }
 ];
 
+let addFriend = userObj => {
+    userObj.scores = userObj.scores.map(num => parseInt(num));
+
+    console.log(matchFriend(userObj));
+
+    friends.push(userObj);
+};
+
+// Calculates the total of all scores for a user or friend
+let calculateTotal = arr => {
+    let total = arr.reduce((total, num) => total + num);
+
+    return total;
+};
+
+// Friend matching algorithm
+// Calculates the total score of the user and each friend, compares each score difference and declares the lowest as the match
+let matchFriend = userObj => {
+    let userScore = calculateTotal(userObj.scores);
+    let match = {
+        name: '',
+        diff: 51,
+        photo: ''
+    };
+
+    friends.forEach(element => {
+        let diff = Math.abs(calculateTotal(element.scores) - userScore);
+
+        if (diff < match.diff) {
+            match.name = element.name;
+            match.diff = diff;
+            match.photo = element.photo;
+        }
+    });
+
+    return match;
+};
+
 module.exports = {
-    list: friends
+    list: friends,
+    add: addFriend
 };
