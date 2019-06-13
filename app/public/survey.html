@@ -24,6 +24,7 @@
 
     <!-- App CSS -->
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/survey.css">
 
     <title>Survey - Friend Finder</title>
 
@@ -36,16 +37,21 @@
             color: #333;
         }
 
-        .mr-3p5 {
-            margin-right: 3.5rem;
-        }
-
         .navbar {
             background-color: #eee;
         }
 
+        .mr-3p5 {
+            margin-right: 3.5rem;
+        }
+
         #submit-btn {
             width: 100%;
+        }
+
+        #photo {
+            max-width: 250px;
+            max-height: 250px;
         }
     </style>
 </head>
@@ -90,7 +96,27 @@
                         <input type="url" class="form-control" id="photo-url" placeholder="https://example.com">
                     </div>
                     <div id="questions-container"></div>
-                    <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
+                    <button type="submit" class="btn btn-primary" id="submit-btn" data-toggle="modal"
+                        data-target="#match">Submit</button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="match" tabindex="-1" role="dialog" aria-labelledby="match-name"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="match-name">Your Match</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="photo-container"></div>
+                                    <div id="name-container"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -182,9 +208,20 @@
                     scores: scores
                 };
 
-                // AJAX post request to the /api/friends endpoint
+                // AJAX POST request to the /api/friends endpoint
                 $.post('/api/friends', survey)
-                    .then((data) => {
+                    .then(data => {
+                        let name = $('#name-container');
+                        let photo = $('#photo-container');
+                        let p = $('<p>');
+                        let img = $('<img>');
+
+                        name.text(data.name);
+
+                        img.attr('src', data.photo);
+                        img.attr('id', 'photo')
+                        photo.html(img);
+
                         console.log(data);
                     });
             });

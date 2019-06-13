@@ -1,0 +1,12 @@
+.mr-3p5 {
+    margin-right: 3.5rem;
+}
+
+#submit-btn {
+    width: 100%;
+}
+
+#photo {
+    max-width: 250px;
+    max-height: 250px;
+}

@@ -1,7 +1,7 @@
 let friends = [
     {
         name: 'Ted Mosby',
-        photo: 'https://www.imdb.com/title/tt0460649/',
+        photo: 'https://bit.ly/2Kisftv',
         scores: [
             4,
             3,
@@ -17,7 +17,7 @@ let friends = [
     },
     {
         name: 'Robin Scherbatsky',
-        photo: 'https://www.imdb.com/title/tt0460649/',
+        photo: 'https://bit.ly/2IhAFzb',
         scores: [
             2,
             4,
@@ -33,7 +33,7 @@ let friends = [
     },
     {
         name: 'Barney Stinson',
-        photo: 'https://www.imdb.com/title/tt0460649/',
+        photo: 'https://bit.ly/2ReHvYS',
         scores: [
             5,
             1,
@@ -49,7 +49,7 @@ let friends = [
     },
     {
         name: 'Lily Aldrin',
-        photo: 'https://www.imdb.com/title/tt0460649/',
+        photo: 'https://bit.ly/2RnLLpf',
         scores: [
             3,
             4,
@@ -65,7 +65,7 @@ let friends = [
     },
     {
         name: 'Marshall Eriksen',
-        photo: 'https://www.imdb.com/title/tt0460649/',
+        photo: 'https://bit.ly/2IEvKHo',
         scores: [
             4,
             2,
@@ -81,31 +81,20 @@ let friends = [
     }
 ];
 
+// Creates friend in the friends array and returns a match in JSON
 let addFriend = userObj => {
-    userObj.scores = userObj.scores.map(num => parseInt(num));
-
-    console.log(matchFriend(userObj));
-
-    friends.push(userObj);
-};
-
-// Calculates the total of all scores for a user or friend
-let calculateTotal = arr => {
-    let total = arr.reduce((total, num) => total + num);
-
-    return total;
-};
-
-// Friend matching algorithm
-// Calculates the total score of the user and each friend, compares each score difference and declares the lowest as the match
-let matchFriend = userObj => {
-    let userScore = calculateTotal(userObj.scores);
+    let userScore;
     let match = {
         name: '',
         diff: 51,
         photo: ''
     };
 
+    userObj.scores = userObj.scores.map(num => parseInt(num));
+    userScore = calculateTotal(userObj.scores);
+
+    // Friend matching algorithm
+    // Compares the total score difference for each friend
     friends.forEach(element => {
         let diff = Math.abs(calculateTotal(element.scores) - userScore);
 
@@ -116,7 +105,16 @@ let matchFriend = userObj => {
         }
     });
 
+    friends.push(userObj);
+
     return match;
+};
+
+// Calculates the total of all scores for a user or friend
+let calculateTotal = arr => {
+    let total = arr.reduce((total, num) => total + num);
+
+    return total;
 };
 
 module.exports = {
