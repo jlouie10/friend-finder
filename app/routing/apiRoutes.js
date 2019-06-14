@@ -11,9 +11,8 @@ let routes = app => {
     // Creates new friend from survey and returns a match
     app.post('/api/friends', (req, res) => {
         let survey = req.body;
-        let match = friends.add(survey);
 
-        res.json(match);
+        res.json(friends.match(survey));
     });
 };
 

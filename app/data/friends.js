@@ -2,87 +2,32 @@ let friends = [
     {
         name: 'Ted Mosby',
         photo: 'https://bit.ly/2Kisftv',
-        scores: [
-            4,
-            3,
-            2,
-            2,
-            5,
-            4,
-            5,
-            1,
-            5,
-            5
-        ]
+        scores: [4, 3, 2, 2, 5, 4, 5, 1, 5, 5]
     },
     {
         name: 'Robin Scherbatsky',
         photo: 'https://bit.ly/2IhAFzb',
-        scores: [
-            2,
-            4,
-            1,
-            3,
-            2,
-            4,
-            3,
-            3,
-            3,
-            3
-        ]
+        scores: [2, 4, 1, 3, 2, 4, 3, 3, 3, 3]
     },
     {
         name: 'Barney Stinson',
         photo: 'https://bit.ly/2ReHvYS',
-        scores: [
-            5,
-            1,
-            5,
-            1,
-            1,
-            5,
-            1,
-            1,
-            1,
-            5
-        ]
+        scores: [5, 1, 5, 1, 1, 5, 1, 1, 1, 5]
     },
     {
         name: 'Lily Aldrin',
         photo: 'https://bit.ly/2RnLLpf',
-        scores: [
-            3,
-            4,
-            4,
-            3,
-            3,
-            1,
-            3,
-            4,
-            4,
-            4
-        ]
+        scores: [3, 4, 4, 3, 3, 1, 3, 4, 4, 4]
     },
     {
         name: 'Marshall Eriksen',
         photo: 'https://bit.ly/2IEvKHo',
-        scores: [
-            4,
-            2,
-            3,
-            2,
-            5,
-            2,
-            5,
-            1,
-            2,
-            5
-        ]
+        scores: [4, 2, 3, 2, 5, 2, 5, 1, 2, 5]
     }
 ];
 
-// Creates friend in the friends array and returns a match in JSON
-let addFriend = userObj => {
+// Calculates and returns a match in JSON and creates friend in the friends array
+let getMatch = userObj => {
     let userScore;
     let match = {
         name: '',
@@ -119,5 +64,5 @@ let calculateTotal = arr => {
 
 module.exports = {
     list: friends,
-    add: addFriend
+    match: getMatch
 };

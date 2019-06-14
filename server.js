@@ -9,6 +9,7 @@ let app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('./app/public'));
 
 // Listener for routes
 app.listen(PORT, () => {
