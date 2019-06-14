@@ -31,7 +31,7 @@ let getMatch = userObj => {
     let userScore;
     let match = {
         name: '',
-        diff: 51,
+        totalDifference: 51,
         photo: ''
     };
 
@@ -41,11 +41,11 @@ let getMatch = userObj => {
     // Friend matching algorithm
     // Compares the total score difference for each friend
     friends.forEach(element => {
-        let diff = Math.abs(calculateTotal(element.scores) - userScore);
+        let totalDifference = Math.abs(calculateTotal(element.scores) - userScore);
 
-        if (diff < match.diff) {
+        if (totalDifference < match.totalDifference) {
             match.name = element.name;
-            match.diff = diff;
+            match.totalDifference = totalDifference;
             match.photo = element.photo;
         }
     });
