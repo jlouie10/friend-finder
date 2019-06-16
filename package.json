@@ -11,8 +11,14 @@
     "type": "git",
     "url": "git+https://github.com/jlouie10/friend-finder.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "friend-finder",
+    "node",
+    "heroku",
+    "html5",
+    "css"
+  ],
+  "author": "Justin Louie",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jlouie10/friend-finder/issues"
